@@ -9,7 +9,7 @@ export portainer_password=$PORTAINER_PASSWORD
 # Authorization
 echo "Logging in to portainer API..."
 
-portainer_token=$(envsubst < ./portainer_credentials.json | curl -q -sS -X POST -H 'Content-Type:application/json'\
+portainer_token=$(envsubst < /kaeptn/portainer_credentials.json | curl -q -sS -X POST -H 'Content-Type:application/json'\
 	"$PORTAINER_HOST/api/auth" -d @- | jq '.jwt' | sed -e 's/\"//g')
 
 [ "$portainer_token" = "null" ] && (echo "Could not login into portainer, check your credentials!"; exit 1)
@@ -31,7 +31,7 @@ echo "Updating service..."
 export new_image=$new_image
 export service_name=$service_name
 
-envsubst < ./container_update.json | curl -q -sS -X POST -H 'Content-Type:application/json' -H "Authorization:$portainer_token"\
+envsubst < /kaeptn/container_update.json | curl -q -sS -X POST -H 'Content-Type:application/json' -H "Authorization:$portainer_token"\
 	"$PORTAINER_HOST/api/endpoints/1/docker/services/$service_name/update?version=$current_version" -d @-
 
 echo "Done!"
