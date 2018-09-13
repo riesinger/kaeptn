@@ -9,7 +9,7 @@ Execute from the working directory:
 ```
 	docker run --rm \
 		-e PLUGIN_SERVICE=<full name of the service> \
-		-e PLUGIN_IMAGE=<new image with tag> \
+		-e PLUGIN_IMAGENAME=<new image with tag> \
 		-e PORTAINER_USER=<portainer API username> \
 		-e PORTAINER_PASSWORD=<hopefullyNot123456> \
 		-e PORTAINER_HOST=<URL to your portainer instance> \

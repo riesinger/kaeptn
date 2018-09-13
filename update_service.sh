@@ -2,7 +2,7 @@
 
 # Re-export plugin and secret variables
 export service_name=$PLUGIN_SERVICE
-export new_image=$PLUGIN_IMAGE
+export new_image=$PLUGIN_IMAGENAME
 export portainer_user=$PORTAINER_USER
 export portainer_password=$PORTAINER_PASSWORD
 
