@@ -1,0 +1,14 @@
+pipeline:
+  publish-docker:
+    image: docker
+    secrets: [ docker_username, docker_password ]
+    commands:
+      - docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD registry.pascal-riesinger.de
+      - docker build -t registry.pascal-riesinger.de/kaeptn:$DRONE_TAG .
+      - docker tag registry.pascal-riesinger.de/kaeptn:$DRONE_TAG registry.pascal-riesinger.de/kaeptn:latest
+      - docker push registry.pascal-riesinger.de/kaeptn:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: tag
+
